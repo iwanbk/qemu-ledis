@@ -1,0 +1,15 @@
+
+ BUILD
+# sudo apt-get install libglib2.0-dev libpixman-1-dev autoconf libtool
+# git clone http://git.aydo.com/aydo/qemu-ledis.git
+# cd qemu-ledis
+# git checkout multi-ledis-pipeline (use multi-ledis-pipeline branch, we will move it to master branch if kristof said so)
+# ./configure --target-list="x86_64-softmmu x86_64-linux-user" --enable-debug
+
+RUN
+$QEMU_ROOT/x86_64-softmmu/qemu-system-x86_64 -hda /home/ledis/img/ubuntu-ledis.img -m 512 --enable-kvm -hdb ldb://1 -cdrom /home/ledis/$ISO
+
+$QEMU_ROOT : our qemu_ledis root directory
+ubuntu-ledis.img : qemu HD image file, we can create it using dd
+ldb://1 : it means our vol driver ID is 1 -> will use 1.md.grid1.com as metadata server
+/home/ledis/$ISO : path to our ubuntu .iso

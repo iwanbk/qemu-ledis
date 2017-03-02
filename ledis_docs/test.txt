@@ -1,0 +1,31 @@
+TESTS
+
+* DNS setting
+ledisdb data use address in range 00-ff.storage.grid1.com
+ledisdb meta use address in range 1-1000.md.grid1.com
+make sure you configured your /etc/hosts so it points to your local machine
+
+* install and run ledisdb as described in ledis.txt
+
+* install and run qemu as described in qemu.txt
+
+
+* Format & mount ledisdb
+# mkfs.ext2 /dev/sdb
+# mkdir /media/ledis
+# mount /dev/sdb /media/ledis
+
+
+* dd test
+# dd of=/dev/zero if=test.dd bs=1M count=100
+# dd of=/dev/zero if=test.dd bs=1M count=100 conv=fsync 
+
+
+* ioping test
+# ioping /dev/sdb
+
+*iozone test
+#iozone -R -l 5 -u 5 -r 4k -s 100mm -F 1 2 3 4 5 | tee -a iozone_results.txt
+
+please check http://www.cyberciti.biz/tips/linux-filesystem-benchmarking-with-iozone.html for more info about 
+this iozone test

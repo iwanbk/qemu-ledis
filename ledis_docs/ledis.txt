@@ -1,0 +1,47 @@
+INSTALL GO
+https://golang.org/doc/install/source
+
+build
+$ cd
+$ hg clone -u release https://code.google.com/p/go
+$ cd go/src
+$ ./all.bash
+
+set go path
+$ export GOROOT=$HOME/go
+$ export GOBIN=$GOROOT/bin
+$ export GOPATH=$HOME/pathgo
+
+$ export PATH=$PATH:$GOBIN
+$ export PATH=$PATH:$GOPATH/bin
+
+INSTALL ROCKSDB
+$ cd
+$ git clone https://github.com/facebook/rocksdb.git
+$ cd rocksdb
+$ sudo apt-get install libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev
+$ make shared_lib
+$ make install
+
+INSTALL LEDISDB
+$ mkdir ~/pathgo
+$ cd ~/pathgo
+$ git clone https://github.com/siddontang/ledisdb.git src/github.com/siddontang/ledisdb
+$ cd src/github.com/siddontang/ledisdb
+$ sudo apt-get install libtool pkg-config autoconf
+$ ./bootstrap.sh
+$ cd ~/pathgo/src/github.com/syndtr/goleveldb/
+$ git checkout 871eee0a7546bb7d1b2795142e29c4534abc49b3
+$ cd -
+$ github.com/cupcake/rdb
+$ (edit dev.sh, change ROCKSDB_DIR to /usr/local)
+$ source dev.sh
+$ make
+
+
+RUN ledisdb
+$ cd ~/pathgo/src/github.com/siddontang/ledisdb
+$  ~/go/bin/ledis-server -config  $CONFIG_FILE
+
+$CONFIG_FILE : path to ledis.conf file, you can find it in the same directory with this docs 
+
